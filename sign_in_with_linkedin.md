@@ -17,6 +17,7 @@
 #### Request access for “Sign in with LinkedIn” and “Share on LinkedIn” OAuth scopes and add redirect URL
 
 ## Server Side
+<img width="452" alt="image" src="https://github.com/nicolas-lukita/documentations/assets/76612512/8a6dd520-cb5e-4d59-8788-e3bc7da75010">
 
 #### Get Access Token
 
@@ -67,16 +68,16 @@ Helper function to generate HttpEntity with parameter and token from getAccessTo
 1. Get user’s LinkedIn id and name by using user detail endpoint and HttpEntity from getAuthEntity()
 2. Get user’s email address by using email endpoint and HttpEntity from getAuthEntity()
 3. Check the user database and process accordingly
-   a. User with LinkedIn Id exist: Generate token for login
-   b. No user with LinkedIn Id but matching email: Link LinkedIn Id to the user and generate token for login
-   c. No user found with matching LinkedIn Id nor email: Returns new UserInfo back to the client side with all user data fetched from endpoints
+   1. User with LinkedIn Id exist: Generate token for login
+   2. No user with LinkedIn Id but matching email: Link LinkedIn Id to the user and generate token for login
+   3. No user found with matching LinkedIn Id nor email: Returns new UserInfo back to the client side with all user data fetched from endpoints
 4. unlinkAccount(email)
    Unlink/remove the LinkedIn Id from the UserInfo
 5. linkAccount(authCode, email)
-   a. Get user LinkedIn Id and email from getAuthEntity()
-   b. Check if other user with the LinkedIn Id already exist
-   c. Check if current user already link with other LinkedIn Id
-   d. If not, Link the LinkedIn Id to this user
+   1. Get user LinkedIn Id and email from getAuthEntity()
+   2. Check if other user with the LinkedIn Id already exist
+   3. Check if current user already link with other LinkedIn Id
+   4. If not, Link the LinkedIn Id to this user
 
 ## FrontEnd - Flutter
 
