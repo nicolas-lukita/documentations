@@ -33,7 +33,7 @@
 require 'jwt'
 key_file = 'key.txt'
 team_id = 'team-id'
-client_id = 'app-id-identifier' #com.synpulse.pulse8app
+client_id = 'app-id-identifier' #com.nicolaslu.appname
 key_id = 'key-id'
 ecdsa_key = OpenSSL::PKey::EC.new IO.read key_file
 headers = {
@@ -58,42 +58,42 @@ puts token
 #### 6. Enable SIWA capabilities on XCode client side project’s runner
  
 ## Server Side
-si![siwafc](https://github.com/nicolas-lukita/documentations/assets/76612512/ec302c78-707d-44e9-a1ba-e365d1d964ec)
+<img width="858" alt="image" src="https://github.com/nicolas-lukita/documentations/assets/76612512/00a0448f-c7e3-4b40-b810-caa2c049cede">
 
 #### 1. Store token and client id safely
 
 ```
 apple:
-  client-id: com.synpulse.pulse8app #app bundle identifier
+  client-id: com.nicolaslu.appname #app bundle identifier
   client-secret: #JWT token generated from initial setup step 5
-  redirect-url: https://synpulse.com
+  redirect-url: https://nicolaslu.com
 ```
 
 #### 2. Set up post request to https://appleid.apple.com/auth/token with these query parameters
-![siwaqp](https://github.com/nicolas-lukita/documentations/assets/76612512/d1be9fef-f339-4d60-99db-3ec87722bd65)
+![siwaqp](https://github.com/nicolas-lukita/documentations/assets/76612512/52a7623a-de75-438c-b4c5-d16d79c0e963)
   - client_id is the app bundle identifier
   - client_secret is the JWT token we generated previously
   - grant_type set to “authorization_code”
   - redirect_uri is the redirect url
   - code is the authorization code passed from Client Side
 #### 3. Decode the response’s id_token payload. The payload will contains the user’s Apple Id (“sub”) and email/private relay email (“email”) 
-<img width="376" alt="siwajwtres" src="https://github.com/nicolas-lukita/documentations/assets/76612512/287df48c-5b12-423a-87aa-2b064577eba2">
+<img width="376" alt="siwajwtres" src="https://github.com/nicolas-lukita/documentations/assets/76612512/680698e6-8756-43d6-9674-113edb55fd7e">
 
 #### 4. Use the Apple Id and the email for processing the user login.
 
 ## Backend - Spring Boot
-This part is about the Pulse8 app backend Apple authentication service flow.
+This part is about the app backend Apple authentication service flow.
 #### 1. Store token and client id safely in application.yaml (can set up for other different environments: dev, local, prod)
 
 ```
 apple:
-  client-id: com.synpulse.pulse8app #app bundle identifier
+  client-id: com.nicolaslu.appname #app bundle identifier
   client-secret: #JWT token generated from initial setup step 5
-  redirect-url: https://synpulse.com
+  redirect-url: https://nicolaslu.com
 ```
 #### 2. getAccessToken(authCode)
   1. Function that handles post request to  `https://appleid.apple.com/auth/token` with the same query parameters as step 2 on Server Side above
-![siwaqp](https://github.com/nicolas-lukita/documentations/assets/76612512/488ab9a3-2947-4af4-998d-537c4edf4a18)
+![siwaqp](https://github.com/nicolas-lukita/documentations/assets/76612512/adbdecf1-b02f-40d4-9366-ab770a5f1eb8)
 
   2. The response will include identity token which contains user’s Apple Id and email
 
@@ -126,7 +126,7 @@ Future<AuthorizationCredentialAppleID> getAppleCredential() async {
           ],
               webAuthenticationOptions: WebAuthenticationOptions(
                   clientId: "${envConfig.appIdentifier}-service",
-                  redirectUri: Uri.parse("https://synpulse.com")));
+                  redirectUri: Uri.parse("https://nicolaslu.com")));
       return credential;
     } on PlatformException catch (e) {
       throw Exception('Failed to get Apple ID Credential: ${e.message}');
