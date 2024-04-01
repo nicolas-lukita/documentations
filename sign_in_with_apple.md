@@ -82,7 +82,6 @@ apple:
 #### 4. Use the Apple Id and the email for processing the user login.
 
 ## Backend - Spring Boot
-This part is about the app backend Apple authentication service flow.
 #### 1. Store token and client id safely in application.yaml (can set up for other different environments: dev, local, prod)
 
 ```
@@ -110,7 +109,7 @@ Unlink/remove the Apple Id from the UserInfo
   2. Check if other user with the Apple Id already exist
   3. Check if current user already link with other Apple Id
   4. If not, Link the Apple Id to this user
-##Frontend - Flutter
+## Frontend - Flutter
 #### 1. Install “Sign in with Apple” package by running
 `flutter pub add sign_in_with_apple`
 #### 2. Create an async function to get Apple credentials by using the package
