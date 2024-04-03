@@ -50,9 +50,11 @@ token = JWT.encode claims, ecdsa_key, 'ES256', headers
 puts token
 ```
 
-- team_id can be found on top right of Apple Developer account or inside App ID
-- client_id is the app’s bundle identifier
-- key_id is the private key identifier
+| Variable   | Description                                                           |
+|------------|-----------------------------------------------------------------------|
+| team_id    | Can be found on top right of Apple Developer account or inside App ID |
+| client_id  | The app’s bundle identifier                                           |
+| key_id     | The private key identifier                                            |
 
 #### 5. Save the file and run ruby client_secret.rb to generate JWT token
 #### 6. Enable SIWA capabilities on XCode client side project’s runner
@@ -71,11 +73,13 @@ apple:
 
 #### 2. Set up post request to https://appleid.apple.com/auth/token with these query parameters
 ![siwaqp](https://github.com/nicolas-lukita/documentations/assets/76612512/52a7623a-de75-438c-b4c5-d16d79c0e963)
-  - client_id is the app bundle identifier
-  - client_secret is the JWT token we generated previously
-  - grant_type set to “authorization_code”
-  - redirect_uri is the redirect url
-  - code is the authorization code passed from Client Side
+| Parameter     | Description                                    |
+|---------------|------------------------------------------------|
+| client_id     | The app bundle identifier                      |
+| client_secret | The JWT token we generated previously          |
+| grant_type    | Set to “authorization_code”                    |
+| redirect_uri  | The redirect url                               |
+| code          | The authorization code passed from Client Side |
 #### 3. Decode the response’s id_token payload. The payload will contains the user’s Apple Id (“sub”) and email/private relay email (“email”) 
 <img width="376" alt="siwajwtres" src="https://github.com/nicolas-lukita/documentations/assets/76612512/680698e6-8756-43d6-9674-113edb55fd7e">
 
