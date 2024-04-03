@@ -40,8 +40,6 @@
 | User Detail   | id firstName lastName | https://api.linkedin.com/v2/me                                                             |
 | Email         | email address         | https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))         |
 | Display Image | profile picture       | https://api.linkedin.com/v2/me?projection=(profilePicture(displayImage~:playableStreams))  |
-| redirect_uri  | url                   | Redirected uri set on the Initial Setup                                                    |
-| code          | String                | Authorization code passed by client side (https://www.linkedin.com/oauth/v2/authorization) |
 
 ## Backend - Spring Boot
 
