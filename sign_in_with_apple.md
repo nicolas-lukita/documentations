@@ -1,7 +1,7 @@
 ## Prerequisites
 - Apple Developer Program membership
 
-## Initial Setup
+## Apple Setup
 #### 1. Register App ID
 1. Register the App ID in https://developer.apple.com/account/resources/identifiers/list/bundleId
 2. Set the app’s description and bundle identifier
@@ -58,7 +58,19 @@ puts token
 
 #### 5. Save the file and run ruby client_secret.rb to generate JWT token
 #### 6. Enable SIWA capabilities on XCode client side project’s runner
- 
+
+## Configure Apple Private Relay Communication
+When users created their account for the first time using SIWA and choose to hide their email address, Apple will provide a private relay email instead which can be used to relay email to user.
+1. Go to Services on Apple developer page (https://developer.apple.com/account/resources/services)
+2. Configure “Sign in with Apple for Email Communication”
+<img width="1037" alt="image" src="https://github.com/nicolas-lukita/documentations/assets/76612512/df7c7beb-8311-45f4-a7cc-2babe4926bde">
+
+3. Add email sources using domains or email address
+<img width="598" alt="image" src="https://github.com/nicolas-lukita/documentations/assets/76612512/e2ef7783-fc7f-4165-89c8-60c289cfe1d3">
+
+4. Check and reverify SPF if the email sources didn’t passed the SPF check
+<img width="939" alt="image" src="https://github.com/nicolas-lukita/documentations/assets/76612512/b5e873d4-4227-4340-9448-beb77b52030d">
+
 ## Server Side
 <img width="858" alt="image" src="https://github.com/nicolas-lukita/documentations/assets/76612512/00a0448f-c7e3-4b40-b810-caa2c049cede">
 
