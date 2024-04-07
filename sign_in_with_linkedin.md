@@ -2,7 +2,7 @@
 
 - LinkedIn Company Page
 
-## Initial Setup
+## LinkedIn Setup
 
 #### Create a LinkedIn App
 
