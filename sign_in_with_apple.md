@@ -15,7 +15,7 @@
   a. Link the Service ID to the App ID
   b. Add Domains and Subdomains of the website that will use the SIWA (Sign in with Apple).
   c. This section still needs to be filled even if there is no intention to use SIWA on any website.
-  d. Add Return URLs 
+  d. Add Return URLs (Callback URL for Android/web)
   e. Save the changes
 #### 3. Create Key
 1. Create key in https://developer.apple.com/account/resources/authkeys/list
@@ -87,7 +87,7 @@ apple:
 ![siwaqp](https://github.com/nicolas-lukita/documentations/assets/76612512/52a7623a-de75-438c-b4c5-d16d79c0e963)
 | Parameter     | Description                                    |
 |---------------|------------------------------------------------|
-| client_id     | The app bundle identifier                      |
+| client_id     | The app bundle identifier for iOS, app service identifer for Android/web                      |
 | client_secret | The JWT token we generated previously          |
 | grant_type    | Set to “authorization_code”                    |
 | redirect_uri  | The redirect url                               |
@@ -96,6 +96,16 @@ apple:
 <img width="376" alt="siwajwtres" src="https://github.com/nicolas-lukita/documentations/assets/76612512/680698e6-8756-43d6-9674-113edb55fd7e">
 
 #### 4. Use the Apple Id and the email for processing the user login.
+
+## Android
+To enable SIWA for android, set up a callback endpoint to relay the credential back to the android app from webview.
+In this post endpoint, redirect the user to:
+```
+intent://callback?$requestBody#Intent;package=$packageIdentifier;scheme=signinwithapple;end
+```
+Where `requestBody` is the post request body and `packageIdentifier` is the android app identifier.
+
+**Use the app `service id` instead of bundle id as the client_id for android/web**
 
 ## Backend - Spring Boot
 #### 1. Store token and client id safely in application.yaml (can set up for other different environments: dev, local, prod)
@@ -125,6 +135,25 @@ Unlink/remove the Apple Id from the UserInfo
   2. Check if other user with the Apple Id already exist
   3. Check if current user already link with other Apple Id
   4. If not, Link the Apple Id to this user
+#### 6. callback(requestBody)
+Request body received would be in form of string: `code=...&id_token=...`
+```
+@PostMapping
+    fun redirectPost(@RequestBody requestBody: String): ResponseEntity<String> {
+        try {
+            println("Received request body: $requestBody")
+
+            val packageIdentifier = ANDROID_APP_IDENTIFIER
+            val redirectUrl = "intent://callback?$requestBody#Intent;package=$packageIdentifier;scheme=signinwithapple;end"
+
+            println("Redirecting to: $redirectUrl")
+            return ResponseEntity.status(HttpStatus.FOUND).header("Location", redirectUrl).build()
+        } catch (e: Exception) {
+            println("Error processing request: ${e.message}")
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing request: ${e.message}")
+        }
+    }
+```
 ## Frontend - Flutter
 #### 1. Install “Sign in with Apple” package by running
 `flutter pub add sign_in_with_apple`
